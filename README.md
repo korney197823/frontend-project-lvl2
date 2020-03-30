@@ -1,6 +1,6 @@
-
-[![Maintainability](https://api.codeclimate.com/v1/badges/866e256647efaa51bca1/maintainability)](https://codeclimate.com/github/korney197823/frontend-project-lvl1/maintainability)
-![](https://github.com/korney197823/frontend-project-lvl1/workflows/Node%20CI/badge.svg)
+[![Maintainability](https://api.codeclimate.com/v1/badges/57dc8645a8b05c5242ff/maintainability)](https://codeclimate.com/github/korney197823/frontend-project-lvl2/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/57dc8645a8b05c5242ff/test_coverage)](https://codeclimate.com/github/korney197823/frontend-project-lvl2/test_coverage)
+![](https://github.com/korney197823/frontend-project-lvl2/workflows/Node%20CI/badge.svg)
 
 ## Difference Calculator
 > Utility for finding differences in configuration files.
