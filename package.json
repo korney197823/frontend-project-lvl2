@@ -6,9 +6,16 @@
   "bin": {
     "gendiff": "dist/bin/gendiff.js"
   },
+  "engines": {
+    "node": ">=13"
+  },
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "NODE_ENV=production babel src --out-dir dist --source-maps inline"
+    "test": "jest",
+    "build": "NODE_ENV=production babel src --out-dir dist --source-maps inline",
+    "prepublishOnly": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -19,9 +26,13 @@
   "bugs": {
     "url": "https://github.com/korney197823/frontend-project-lvl2/issues"
   },
+  "jest": {
+    "testEnvironment": "node"
+  },
   "homepage": "https://github.com/korney197823/frontend-project-lvl2#readme",
   "dependencies": {
-    "commander": "^5.0.0"
+    "commander": "^5.0.0",
+    "lodash": "^4.17.15"
   },
   "devDependencies": {
     "@babel/cli": "^7.8.4",
@@ -35,6 +46,7 @@
     "eslint-plugin-babel": "^5.3.0",
     "eslint-plugin-import": "^2.20.2",
     "eslint-plugin-jest": "^23.8.2",
-    "jest": "^25.2.4"
+    "jest": "^25.2.4",
+    "jest-cli": "^25.2.7"
   }
 }
