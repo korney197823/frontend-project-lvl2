@@ -1,7 +1,9 @@
 #!/usr/bin/env node
-import { program } from 'commander';
-import { description, version } from '../../package.json';
+import program from 'commander';
 import getDiff from '../engine.js';
+
+const description = 'Compares two configuration files and shows a difference';
+const version = '1.0.0';
 
 
 program

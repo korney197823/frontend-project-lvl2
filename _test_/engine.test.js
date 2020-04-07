@@ -1,7 +1,4 @@
-const engine = (num) => {
-  const result = num / 2;
-  return result;
-};
+import getDiff from "../src";
 
 test('engine', () => {
   expect(engine(6)).toBe(3);
