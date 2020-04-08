@@ -1,5 +1,16 @@
-const engine = (a) => a / 2;
+import getDiff from '../src/engine.js';
 
-test('engine', () => {
-  expect(engine(6)).toBe(3);
+const right1 = '{"host":"hexlet.io",'
+    + '"name":"korney",'
+    + '"+ subname":"den",'
+    + '"+ verbose":true,'
+    + '"- proxy":"123.234.53.22",'
+    + '"- follow":false,'
+    + '"- cash":"128",'
+    + '"+ cash":"129",'
+    + '"- timeout":"50",'
+    + '"+ timeout":"20"}';
+
+test('genDiff', () => {
+  expect(getDiff('before.json', 'after.json')).toBe(right1);
 });
