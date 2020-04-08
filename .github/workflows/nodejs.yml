@@ -2,6 +2,7 @@ name: Node CI
 
 on:
   - push
+  - pull_request
 
 jobs:
   build:
@@ -13,16 +14,27 @@ jobs:
         node-version: [13.x]
 
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - name: npm install
+      - name: npm install, build
         run: |
           make install
+          make build
         env:
           CI: true
       - name: Run linter
         run: |
           make lint
+      - name: Test & publish code coverage
+          # Publish code coverage on Code Climate
+          # https://github.com/paambaati/codeclimate-action
+          uses: paambaati/codeclimate-action@v2.4.0
+          # Add Code Climate secret key
+          env:
+            CC_TEST_REPORTER_ID: ebc80de2e1fe9249ab0d58ff7ab5f179a7ebfd66905487ff068036f95607b2a1
+          with:
+            coverageCommand: make test-coverage
+            debug: true
