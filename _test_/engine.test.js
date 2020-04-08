@@ -12,5 +12,5 @@ const right1 = '{"host":"hexlet.io",'
     + '"+ timeout":"20"}';
 
 test('genDiff', () => {
-  expect(getDiff('before.json', 'after.json')).toBe(right1);
+  expect(getDiff('_fixtures_/before.json', '_fixtures_/after.json')).toBe(right1);
 });

@@ -4,5 +4,3 @@
 dist
 coverage
 *.log
-before.json
-after.json
