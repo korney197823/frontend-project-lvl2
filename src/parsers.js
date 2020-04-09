@@ -8,6 +8,9 @@ const getParseFile = (pathToFile) => {
   if (format === '.json') {
     result = JSON.parse(fs.readFileSync(pathToFile));
   }
+  if (format === '.yml') {
+
+  }
   return result;
 };
 
