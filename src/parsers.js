@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import yaml from 'js-yaml';
+import ini from 'ini';
 
 
 const getParseFile = (pathToFile) => {
@@ -11,6 +12,9 @@ const getParseFile = (pathToFile) => {
   }
   if (format === '.yml') {
     result = yaml.safeLoad(fs.readFileSync(pathToFile, 'utf8'));
+  }
+  if (format === '.ini') {
+    result = ini.parse(fs.readFileSync(pathToFile, 'utf8'));
   }
   return result;
 };

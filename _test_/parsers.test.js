@@ -9,9 +9,8 @@ const right = {
   host: 'hexlet.io',
 };
 
-console.log(getParseFile('_fixtures_/after.yml'));
-
 test('parsers', () => {
   expect(getParseFile('_fixtures_/after.json')).toEqual(right);
   expect(getParseFile('_fixtures_/after.yml')).toEqual(right);
+  expect(getParseFile('_fixtures_/after.ini')).toEqual(right);
 });
