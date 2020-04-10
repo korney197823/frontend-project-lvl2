@@ -1,9 +1,9 @@
 import _ from 'lodash';
-import fs from 'fs';
+import getParseFile from './parsers';
 
 const getDiff = (fileOne, fileTwo) => {
-  const before = JSON.parse(fs.readFileSync(fileOne));
-  const after = JSON.parse(fs.readFileSync(fileTwo));
+  const before = getParseFile(fileOne);
+  const after = getParseFile(fileTwo);
   const keysOne = Object.entries(before);
   const keysTwo = Object.entries(after);
 

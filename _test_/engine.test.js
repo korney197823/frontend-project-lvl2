@@ -13,4 +13,5 @@ const right1 = '{"host":"hexlet.io",'
 
 test('genDiff', () => {
   expect(getDiff('_fixtures_/before.json', '_fixtures_/after.json')).toBe(right1);
+  expect(getDiff('_fixtures_/before.json', '_fixtures_/after.yml')).toBe(right1);
 });
