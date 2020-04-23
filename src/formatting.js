@@ -1,6 +1,7 @@
 const formatData = (list) => {
   let result = '';
 
+  // eslint-disable-next-line array-callback-return,consistent-return
   const resultArr = list.map((item) => {
     if (item[item.length - 1].status === 'deleted') {
       return `  - ${item[0]}: ${item[1]}`;

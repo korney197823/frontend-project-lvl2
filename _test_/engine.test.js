@@ -12,7 +12,7 @@ const right1 = `{
   + cash: 129
 }`;
 
-console.log(right1);
+console.log(getDiff('_fixtures_/before.json', '_fixtures_/after.json'));
 
 test('genDiff', () => {
   expect(getDiff('_fixtures_/before.json', '_fixtures_/after.json')).toBe(right1);
