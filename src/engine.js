@@ -4,59 +4,77 @@ import getParseFile from './parsers';
 const getDiff = (fileOne, fileTwo) => {
   const before = getParseFile(fileOne);
   const after = getParseFile(fileTwo);
-  const keysOne = Object.entries(before);
-  const keysTwo = Object.entries(after);
-
-  const getEqualElement = (arr1, arr2) => {
-    const equalElements = _.intersectionWith(arr1, arr2, _.isEqual);
-
-    return equalElements;
+  const beforeArr = Object.entries(before);
+  const afterArr = Object.entries(after);
+  const status = {
+    unchange: 'unchenged',
+    delete: 'deleted',
+    add: 'added',
+    change: 'changed',
   };
 
-  const getAddedElement = (arr1, arr2) => {
-    const addedElements = _.differenceWith(arr2, arr1, (key2, key1) => key1[0] === key2[0]);
+  function addStatus(arr, changeStatus) {
+    const result = [];
+    if (changeStatus === 'deleted') {
+      return arr.map((item) => {
+        const a = [...item, { status: 'deleted' }];
+        return a;
+      });
+    }
+    if (changeStatus === 'added') {
+      return arr.map((item) => {
+        const a = [...item, { status: 'added' }];
+        return a;
+      });
+    }
+    if (changeStatus === 'unchenged') {
+      return arr.map((item) => {
+        const a = [...item, { status: 'unchenged' }];
+        return a;
+      });
+    }
+    if (changeStatus === 'changed') {
+      return arr.map((item) => {
+        const a = [...item, { status: 'changed' }];
+        return a;
+      });
+    }
+    return result;
+  }
 
-    const formatedElement = addedElements.map((elem) => [`+ ${elem[0]}`, elem[1]]);
+  const intersection = _.intersectionWith(beforeArr, afterArr, _.isEqual);
 
-    return formatedElement;
-  };
+  const deletedElements = _.differenceWith(beforeArr,
+    afterArr, (itemOne, itemTwo) => itemOne[0] === itemTwo[0]);
 
-  const getDeletedElement = (arr1, arr2) => {
-    const deletedElements = _.differenceWith(arr1, arr2, (key1, key2) => key1[0] === key2[0]);
+  const addedElements = _.differenceWith(afterArr,
+    beforeArr, (itemOne, itemTwo) => itemOne[0] === itemTwo[0]);
 
-    const formatedElement = deletedElements.map((elem) => [`- ${elem[0]}`, elem[1]]);
+  const changeBefore = _.intersectionWith(beforeArr,
+    afterArr, (itemOne, itemTwo) => itemOne[0] === itemTwo[0] && itemOne[1] !== itemTwo[1]);
 
-    return formatedElement;
-  };
+  const changeAfter = _.intersectionWith(afterArr,
+    beforeArr,
+    (itemOne, itemTwo) => itemOne[0] === itemTwo[0] && itemOne[1] !== itemTwo[1]);
 
-  const getChangedElement = (arr1, arr2) => {
-    const chBefore = _.intersectionWith(arr1, arr2, (i1, i2) => i1[0] === i2[0] && i1[1] !== i2[1]);
-    const chAfter = _.intersectionWith(arr2, arr1, (i1, i2) => i1[0] === i2[0] && i1[1] !== i2[1]);
-
-    const formatedElementBefore = chBefore.map((elem) => [`- ${elem[0]}`, elem[1]]);
-    const formatedElementAfter = chAfter.map((elem) => [`+ ${elem[0]}`, elem[1]]);
-
-    const concatCnadgedElements = [...formatedElementBefore, ...formatedElementAfter];
-
-    const sortedArr = concatCnadgedElements.sort((a, b) => {
-      if (a[0].substring(2) < b[0].substring(2)) {
-        return -1;
+  // eslint-disable-next-line array-callback-return,consistent-return
+  const mergeChangedArr = changeBefore.map((itemBefore) => {
+    // eslint-disable-next-line no-restricted-syntax
+    for (const itemAfter of changeAfter) {
+      if (itemBefore[0] === itemAfter[0]) {
+        return [...itemBefore, itemAfter[1]];
       }
-      if (a[0].substring(2) > b[0].substring(2)) {
-        return 1;
-      }
-      return 0;
-    });
+    }
+  });
 
-    return sortedArr;
-  };
+  const result = [...addStatus(intersection, status.unchange),
+    ...addStatus(deletedElements, status.delete),
+    ...addStatus(addedElements, status.add),
+    ...addStatus(mergeChangedArr, status.change),
+  ];
 
-  const a = getEqualElement(keysOne, keysTwo);
-  const b = getAddedElement(keysOne, keysTwo);
-  const c = getDeletedElement(keysOne, keysTwo);
-  const d = getChangedElement(keysOne, keysTwo);
 
-  return JSON.stringify(Object.fromEntries([...a, ...b, ...c, ...d]));
+  console.log(result);
 };
 
 export default getDiff;
