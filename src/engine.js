@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import getParseFile from './parsers';
+import formatData from './formatting';
 
 const getDiff = (fileOne, fileTwo) => {
   const before = getParseFile(fileOne);
@@ -73,8 +74,7 @@ const getDiff = (fileOne, fileTwo) => {
     ...addStatus(mergeChangedArr, status.change),
   ];
 
-
-  console.log(result);
+  return formatData(result);
 };
 
 export default getDiff;

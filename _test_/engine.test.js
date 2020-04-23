@@ -1,21 +1,20 @@
 import getDiff from '../src/engine.js';
 
-const right1 = '{\n'
-    + '\t  host: hexlet.io\n'
-    + '\t  name: korney\n'
-    + '\t+ subname: den\n'
-    + '\t+ verbose: true\n'
-    + '\t- proxy: 123.234.53.22\n'
-    + '\t- follow: false\n'
-    + '\t- cash: 128\n'
-    + '\t+ cash: 129\n'
-    + '\t- timeout: 50\n'
-    + '\t+ timeout: 20\n'
-    + '}';
+const right1 = `{
+    host: hexlet.io
+  - proxy: 123.234.53.22
+  - follow: false
+  + subname: den
+  + verbose: true
+  - timeout: 50
+  + timeout: 20
+  - cash: 128
+  + cash: 129
+}`;
 
 console.log(right1);
 
 test('genDiff', () => {
   expect(getDiff('_fixtures_/before.json', '_fixtures_/after.json')).toBe(right1);
-  expect(getDiff('_fixtures_/before.json', '_fixtures_/after.yml')).toBe(right1);
+  expect(getDiff('_fixtures_/before.yml', '_fixtures_/after.yml')).toBe(right1);
 });

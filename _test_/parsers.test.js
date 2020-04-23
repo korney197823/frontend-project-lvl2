@@ -1,7 +1,6 @@
 import getParseFile from '../src/parsers';
 
 const right = {
-  name: 'korney',
   timeout: '20',
   subname: 'den',
   cash: '129',
