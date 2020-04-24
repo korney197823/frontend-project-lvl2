@@ -15,29 +15,29 @@ const getDiff = (fileOne, fileTwo) => {
   };
 
   function addStatus(arr, changeStatus) {
-    const result = [];
+    let result = [];
     if (changeStatus === 'deleted') {
       return arr.map((item) => {
-        const a = [...item, { status: 'deleted' }];
-        return a;
+        result = [...item, { status: 'deleted' }];
+        return result;
       });
     }
     if (changeStatus === 'added') {
       return arr.map((item) => {
-        const a = [...item, { status: 'added' }];
-        return a;
+        result = [...item, { status: 'added' }];
+        return result;
       });
     }
     if (changeStatus === 'unchenged') {
       return arr.map((item) => {
-        const a = [...item, { status: 'unchenged' }];
-        return a;
+        result = [...item, { status: 'unchenged' }];
+        return result;
       });
     }
     if (changeStatus === 'changed') {
       return arr.map((item) => {
-        const a = [...item, { status: 'changed' }];
-        return a;
+        result = [...item, { status: 'changed' }];
+        return result;
       });
     }
     return result;
